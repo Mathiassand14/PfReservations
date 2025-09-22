@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Item Stock Summary",
+  "type": "object",
+  "required": ["item", "currentQuantity", "isCalculated"],
+  "properties": {
+    "item": { "type": "object" },
+    "currentQuantity": { "type": "integer", "minimum": 0 },
+    "isCalculated": { "type": "boolean" },
+    "stockCalculation": {
+      "type": "object",
+      "properties": {
+        "isCalculated": { "type": "boolean" },
+        "method": { "type": "string" },
+        "availableQuantity": { "type": "integer", "minimum": 0 },
+        "limitingComponent": { "type": ["string", "null"] },
+        "stockStatus": { "type": "string", "enum": ["out_of_stock", "low_stock", "in_stock"] }
+      }
+    }
+  }
+}
+

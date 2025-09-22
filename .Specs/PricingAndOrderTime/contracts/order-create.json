@@ -1,0 +1,38 @@
+{
+  "name": "Create Order — Pricing & Time Windows",
+  "request": {
+    "method": "POST",
+    "path": "/api/orders",
+    "body": {
+      "customerId": 1,
+      "status": "Draft",
+      "setup_start": null,
+      "order_start": "2025-01-10T08:00:00Z",
+      "order_end": "2025-01-11T10:00:00Z",
+      "cleanup_end": null,
+      "lines": [
+        { "line_type": "Equipment", "item_id": 5, "kind": "Start", "quantity": 1 },
+        { "line_type": "Equipment", "item_id": 5, "kind": "Daily", "quantity": 1 },
+        { "line_type": "Service", "item_id": null, "kind": "Hourly", "hours": 2.1, "unit_price": 160.00 }
+      ]
+    }
+  },
+  "expected": {
+    "status": 201,
+    "body": {
+      "order": {
+        "id": "<number>",
+        "captured_rebate_percent": "<percent>",
+        "subtotal": 0,
+        "rebate_amount": 0,
+        "total_ex_vat": 0,
+        "calculated_at": "<iso8601>",
+        "lines": [
+          { "kind": "Start", "rebate_applied": "<percent>" },
+          { "kind": "Daily", "rebate_applied": "<percent>" },
+          { "kind": "Hourly", "rebate_applied": 0 }
+        ]
+      }
+    }
+  }
+}

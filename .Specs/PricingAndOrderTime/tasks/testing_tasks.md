@@ -1,0 +1,43 @@
+# Testing Tasks — PricingAndOrderTime
+
+- [ ] T003: Integration — order calculation
+  - [x] T003-01: Contract cases (daily threshold, rebates, rounding)
+  - [x] T003-02: Composite pricing and availability window
+  - File: `tests/integration/order-calculation.int.test.js`
+  - Validate daily threshold, 15-min rounding, rebates only on equipment, composite sum of components.
+  - Depends on: T001
+- [ ] T004: Integration — order creation auto-calc (Draft/Reserved)
+  - [x] T004-01: Totals stored and rebate snapshot on create
+  - [x] T004-02: Auto-calc on Reserved transition
+  - File: `tests/integration/order-create.int.test.js`
+  - Validate totals stored, captured rebate percent, services undiscounted.
+  - Depends on: T001
+- [ ] T005: Integration — recalc endpoint
+  - [x] T005-01: POST /api/orders/:id/recalculate recomputes totals
+  - [x] T005-02: Dispatched has no auto-calc (manual only)
+  - File: `tests/integration/order-recalculate.int.test.js`
+  - Validate POST `/api/orders/:id/recalculate` recomputes totals; Dispatched has no auto-calc.
+  - Depends on: T001
+- [x] T006: Unit — pricing engine
+  - [x] T006-01: Rounding to next 15 minutes
+  - [x] T006-02: Daily count after first 24h
+  - [x] T006-03: Equipment vs service rebate application
+  - [x] T006-04: Composite components sum
+  - File: `tests/unit/pricing.engine.test.js`
+  - Cover 15-min rounding up, first 24h free, rebate application rules, composite pricing, availability window.
+  - Depends on: T001
+- [ ] T007: Unit — CSV parsing and rebate derivation
+  - [x] T007-01: Parse kinds from item names
+  - [x] T007-02: Derive Internal rebate (average Intern/Ekstern pairs)
+  - [x] T007-03: Idempotent updates and Hourly exclusion
+  - File: `tests/unit/pricing.csv.test.js`
+  - Parse kinds; derive global Internal rebate (average across Intern/Ekstern pairs for Start/Daily); exclude Hourly; idempotency.
+  - Depends on: T001
+
+- [ ] T016d: Items.type tests
+  - [x] T016d-01: Unit — Item model parses/outputs type and maps legacy is_composite
+  - [x] T016d-02: Integration — POST /api/items for Atomic/Composite/Service enforces constraints
+
+- [x] T005: Integration — recalc endpoint
+  - [x] T005-01: POST /api/orders/:id/recalculate recomputes totals
+  - [x] T005-02: Dispatched has no auto-calc (manual only)

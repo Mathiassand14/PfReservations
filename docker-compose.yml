@@ -1,0 +1,34 @@
+
+
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=equipment_rental
+      - POSTGRES_USER=equipment_user
+      - POSTGRES_PASSWORD=equipment_pass
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  app:
+    build: .
+    # Ensure migrations run automatically on startup
+    command: sh -lc "node bin/wait-for-db.js && npm run migrate && node server.js"
+    ports:
+      - "${HOST_PORT:-3456}:${PORT:-3456}"
+    environment:
+      - PORT=${PORT:-3456}
+      - DATABASE_URL=${DATABASE_URL:-postgresql://equipment_user:equipment_pass@db:5432/equipment_rental}
+      - X_ADMIN_TOKEN=${X_ADMIN_TOKEN:-secure-admin-token-change-in-production}
+      - NODE_ENV=${NODE_ENV:-production}
+      # Optional: tweak DB wait behavior
+      - DB_WAIT_ATTEMPTS=${DB_WAIT_ATTEMPTS:-60}
+      - DB_WAIT_DELAY_MS=${DB_WAIT_DELAY_MS:-1000}
+    depends_on:
+      - db
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

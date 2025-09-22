@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Order Lines Response",
+  "type": "object",
+  "required": ["orderId", "lineItems", "count"],
+  "properties": {
+    "orderId": { "type": "integer" },
+    "count": { "type": "integer", "minimum": 0 },
+    "lineItems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "itemId", "itemName", "itemSku", "quantity", "pricePerDay", "rentalDays", "lineTotal"],
+        "properties": {
+          "id": { "type": "integer" },
+          "itemId": { "type": "integer" },
+          "itemName": { "type": "string" },
+          "itemSku": { "type": "string" },
+          "quantity": { "type": "integer", "minimum": 1 },
+          "pricePerDay": { "type": "number", "minimum": 0 },
+          "rentalDays": { "type": "integer", "minimum": 1 },
+          "lineTotal": { "type": "number", "minimum": 0 }
+        }
+      }
+    }
+  }
+}
+

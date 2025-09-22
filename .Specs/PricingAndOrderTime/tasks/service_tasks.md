@@ -1,0 +1,42 @@
+# Service Tasks — PricingAndOrderTime
+
+- [x] T008: Pricing engine library
+  - [x] T008-01: Implement rounding and daily threshold utils
+  - [x] T008-02: Implement equipment/service/composite line pricing
+  - [x] T008-03: Implement order totals (rebates, components sum)
+  - Files: `lib/pricing/engine.js`, `lib/pricing/index.js`
+  - Functions: `roundToNext15Min`, `calcDailyCount`, `priceEquipmentLine`, `priceServiceLine`, `priceCompositeLine`, `calcOrderTotals`.
+  - Depends on: T003, T006
+- [x] T016: Repositories — new/extended
+  - [x] T016-01: Price and rebate group repositories
+  - [x] T016-02: Extend orders repo for time/totals fields and availability window
+  - [x] T016-03: Order lines repository
+  - Files: `repositories/priceRepository.js`, `repositories/rebateGroupRepository.js`, `repositories/orderRepository.js`, `repositories/orderLineRepository.js`
+  - CRUD/upserts for prices, rebate groups; extend orders for new fields; update availability window.
+  - Depends on: T011, T013, T014
+- [x] T017: OrderService — apply pricing & availability
+  - [x] T017-01: Calculate on create and on Draft/Reserved transitions (placeholder calculated_at)
+  - [x] T017-02: Skip auto-calc on Dispatched; add recalc logic (recalc endpoint wired)
+  - [x] T017-03: Enforce out window across setup/order/cleanup
+  - File: `services/OrderService.js`
+  - On create and transitions to Draft/Reserved: compute totals; snapshot rebate percent; skip auto-calc on Dispatched; enforce out window.
+  - Depends on: T008, T012, T014, T016
+- [ ] T019: Calendar/availability adjustments
+  - [x] T019-01: External feed uses order window only
+  - [x] T019-02: Internal feed shows setup/order/cleanup blocks
+  - Files: `routes/calendar-feed.js` (and related services)
+  - External feeds show [order_start, order_end]; internal feeds show setup/order/cleanup blocks; availability uses extended window.
+  - Depends on: T012, T017
+- [x] T020 [P]: Logger helper and instrumentation
+  - Files: `services/logger.js`, `bin/pricing-import.js`, `services/OrderService.js`, `routes/orders-recalc.js`
+  - JSON logs with order_id/action/duration.
+  - Depends on: T010, T017, T018
+  - Status: [x] Implemented logger and added instrumentation to CLI, service, and recalc route
+- [x] T009: CSV parser and rebate derivation
+  - [x] T009-01: Implement name parsing to kind/group/service
+  - [x] T009-02: Compute global Internal rebate percent from Intern/Ekstern Start/Daily pairs
+  - [x] T009-03: Produce base prices collection and CSV parse helpers
+
+- [x] T016b: Model/API — items.type support
+  - [x] T016b-01: Update models/Item to include type, map to legacy is_composite, enforce qty rules by type
+  - [x] T016b-02: Ensure /api/items returns type via toJSON

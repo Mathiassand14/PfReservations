@@ -1,0 +1,40 @@
+# Database Tasks — PricingAndOrderTime
+
+- [x] T011: Migrations — rebate groups and customer fields
+  - [x] T011-01: Create table `rebate_groups(name, percent)` and seed Ekstern=0
+  - [x] T011-02: Add `customers.rebate_group` (default Ekstern) and `customers.rebate_percent_override`
+  - [x] T011-03: Backfill existing customers to Ekstern
+  - File: `migrations/006_add_rebate_groups.sql`
+  - Create table `rebate_groups(name, percent)`, seed Ekstern=0; add `customers.rebate_group` (default Ekstern) and `customers.rebate_percent_override`.
+  - Depends on: T003
+- [x] T012: Migrations — orders time/total fields and status
+  - [x] T012-01: Add time fields (`setup_start`, `order_start`, `order_end`, `cleanup_end`)
+  - [x] T012-02: Add totals fields and `captured_rebate_percent`, `calculated_at`
+  - [x] T012-03: Add `status` (Draft/Reserved/Dispatched) and time constraints
+  - File: `migrations/007_extend_orders_time_columns.sql`
+  - Add `setup_start`, `order_start`, `order_end`, `cleanup_end`, `calculated_at`, `subtotal`, `rebate_amount`, `total_ex_vat`, `captured_rebate_percent`, `status`; add time constraints.
+  - Depends on: T003, T004
+- [x] T013: Migrations — prices table
+  - [x] T013-01: Create `prices(item_id, kind, amount, UNIQUE(item_id, kind))`
+  - [x] T013-02: Add constraint to forbid composite item prices; enforce Hourly only for services
+  - File: `migrations/008_create_prices_table.sql`, `migrations/014_update_prices_constraints.sql`
+  - `prices(item_id, kind Start/Daily/Hourly, amount, UNIQUE(item_id, kind))`; forbid prices for composites; Hourly only for services.
+  - Depends on: T007
+- [x] T014: Migrations — order_lines schema
+  - [x] T014-01: Add fields (`line_type`, `kind`, `quantity`, `hours`, `unit_price`, `rebate_applied`, `override_reason`)
+  - [x] T014-02: Constraints for services vs equipment lines
+  - File: `migrations/009_extend_order_lines.sql`
+  - Fields: `line_type`, `kind`, `quantity`, `hours`, `unit_price`, `rebate_applied`, `override_reason`.
+  - Depends on: T003, T004
+- [x] T015: Constraints — composite components
+  - [x] T015-01: Enforce Equipment-only `item_components.child_id`
+  - [x] T015-02: Ensure composites have NULL `quantity_on_hand`
+  - File: `migrations/010_constraints_components.sql`, `migrations/013_update_item_components_constraints.sql`
+  - Enforce Equipment-only components; composites have NULL `quantity_on_hand`.
+  - Depends on: T006
+
+- [x] T016a: Items type column and backfill
+  - [x] T016a-01: Add `items.type VARCHAR(16)` with CHECK ('Atomic','Composite','Service') DEFAULT 'Atomic'
+  - [x] T016a-02: Backfill: set `type='Composite'` where `is_composite=true`; leave 'Atomic' otherwise
+  - [x] T016a-03: Add constraint: `quantity_on_hand` NULL for `type IN ('Composite','Service')`, allow 0 default for Atomic
+  - [x] T016a-04: Keep `is_composite` for compatibility (mark deprecated); plan removal in a major upgrade

@@ -1,0 +1,21 @@
+{
+  "name": "Order Calculation — Daily Threshold & Rounding",
+  "given": {
+    "customer": { "rebate_group": "Internal", "rebate_percent_override": null },
+    "internal_rebate_percent": 20.0,
+    "order_window": ["2025-01-10T08:00:00Z", "2025-01-12T09:00:00Z"],
+    "lines": [
+      { "line_type": "Equipment", "item_id": 9, "kind": "Start", "quantity": 1, "unit_price": 500.00 },
+      { "line_type": "Equipment", "item_id": 9, "kind": "Daily", "quantity": 2, "unit_price": 200.00 },
+      { "line_type": "Service", "kind": "Hourly", "hours": 2.05, "unit_price": 160.00 }
+    ]
+  },
+  "then": {
+    "hourly_billed_hours": 2.25,
+    "equipment_subtotal": 500 + 2*200,
+    "rebate_percent": 20.0,
+    "rebate_amount": 0.2 * (500 + 400),
+    "services_total": 2.25 * 160,
+    "total_ex_vat": (500 + 400) * 0.8 + (2.25 * 160)
+  }
+}

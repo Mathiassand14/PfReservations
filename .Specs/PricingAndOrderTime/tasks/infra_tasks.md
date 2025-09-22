@@ -1,0 +1,29 @@
+# Infra/Tooling Tasks — PricingAndOrderTime
+
+- [x] T001 [P]: Create scaffolding folders and placeholders
+  - [x] T001-01: Create directories (lib/pricing, tests, bin, .Specs/_Kiro)
+  - [x] T001-02: Add lib/pricing/index.js and README.md placeholders
+  - Paths: `lib/pricing/`, `lib/pricing/__tests__/`, `bin/`, `tests/integration/`, `tests/unit/`, `.Specs/_Kiro/`
+  - Create empty `lib/pricing/index.js` and `lib/pricing/README.md`.
+- [x] T002 [P]: Ensure spec sync and recalc scripts
+  - [x] T002-01: Verify `specs:sync` script exists
+  - [x] T002-02: Add `recalc:order` placeholder script if needed
+  - File: `package.json`
+  - Verify `specs:sync` (`node bin/specs-sync.js`); add `recalc:order` placeholder if missing.
+- [x] T010: Import CLI
+  - [x] T010-01: Parse args and call CSV import API
+  - [x] T010-02: Persist entities and print JSON summary
+  - File: `bin/pricing-import.js`
+  - Read `--file`, call `lib/pricing/csv`, upsert items/prices, persist rebate_groups; output JSON summary.
+  - Depends on: T009
+- [ ] T021 [P]: Seed updates
+  - [x] T021-01: Seed rebate_groups and customer group defaults
+  - [x] T021-02: Seed prices for items; skip composites
+  - File: `seeds/seed.js`
+  - Insert rebate_groups, set customer groups, prices for items; ensure composites lack direct prices.
+  - Depends on: T011, T013
+- [ ] T023: .kiro sync guard (optional)
+  - [ ] T023-01: Implement pre-commit check or add docs section
+  - File: `.git/hooks/pre-commit` (or docs)
+  - Warn if `.kiro` changed since last `.Specs/_Kiro/manifest.json` without running `npm run specs:sync`.
+  - Depends on: T002

@@ -1,0 +1,22 @@
+{
+  "name": "Recalculate Order — No Auto in Dispatched",
+  "request": {
+    "method": "POST",
+    "path": "/api/orders/123/recalculate"
+  },
+  "preconditions": {
+    "order": { "id": 123, "status": "Dispatched", "captured_rebate_percent": 15.0 }
+  },
+  "expected": {
+    "status": 200,
+    "body": {
+      "order": {
+        "id": 123,
+        "subtotal": "<number>",
+        "rebate_amount": "<number>",
+        "total_ex_vat": "<number>",
+        "calculated_at": "<iso8601>"
+      }
+    }
+  }
+}

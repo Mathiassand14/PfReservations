@@ -1,0 +1,100 @@
+Vare#,Vare,Priser
+1,"Personaleløn",160
+2,"Rengøring pr time",160
+3,"Aften-nedpakning",80
+4,"Transport",150
+5,"EV’er Ekstern, Start)",400
+6,"EV’er (Ekstern, Dagspris)",200
+7,"EV’er (Intern, Start)",300
+8,"EV’er (Intern, Dagspris)",200
+9,"Lille L'acoustic (Ekstern, Start)",650
+10,"Lille L'acoustic (Ekstern, Dagspris)",300
+11,"Lille L'acoustic (Intern, Start)",500
+12,"Lille L'acoustic (Intern, Dagspris)",300
+13,"D&B anlæg (Ekstern, Start)",1200
+14,"D&B anlæg (Ekstern, Dagspris)",400
+15,"D&B anlæg (Intern, Start)",1000
+16,"D&B anlæg (Intern, Dagspris)",400
+17,"Stor L'acoustic (Ekstern, Start)",1500
+18,"Stor L'acoustic (Ekstern, Dagspris)",550
+19,"Stor L'acoustic (Intern, Start)",1200
+20,"Stor L'acoustic (Intern, Dagspris)",550
+21,"Monitor (Ekstern, Start)",300
+22,"Monitor (Ekstern, Dagspris)",150
+23,"Monitor (Intern, Start)",300
+24,"Monitor (Intern, Dagspris)",150
+25,"Stor Lydmixer (Ekstern, Start)",600
+26,"Stor Lydmixer (Ekstern, Dagspris)",500
+27,"Stor Lydmixer (Intern, Start)",500
+28,"Stor Lydmixer (Intern, Dagspris)",400
+29,"Mellem Lydmixer (Ekstern, Start)",600
+30,"Mellem Lydmixer (Ekstern, Dagspris)",500
+31,"Mellem Lydmixer (Intern, Start)",500
+32,"Mellem Lydmixer (Intern, Dagspris)",400
+33,"Lille Lydmixer (Ekstern, Start)",200
+34,"Lille Lydmixer (Ekstern, Dagspris)",150
+35,"Lille Lydmixer (Intern, Start)",150
+36,"Lille Lydmixer (Intern, Dagspris)",100
+37,"Mikrofonstativ (Ekstern, Start)",50
+38,"Mikrofonstativ (Ekstern, Dagspris)",30
+39,"Mikrofonstativ (Intern, Start)",40
+40,"Mikrofonstativ (Intern, Dagspris)",20
+41,"Par lamper (Ekstern, Start)",40
+42,"Par lamper  (Ekstern, Dagspris)",30
+43,"Par lamper  (Intern, Start)",30
+44,"Par lamper  (Intern, Dagspris)",20
+45,"Rollers (Ekstern, Start)",40
+46,"Rollers  (Ekstern, Dagspris)",30
+47,"Rollers  (Intern, Start)",30
+48,"Rollers  (Intern, Dagspris)",20
+49,"Moving Head (Ekstern, Start)",100
+50,"Moving Head (Ekstern, Dagspris)",80
+51,"Moving Head (Intern, Start)",80
+52,"Moving Head (Intern, Dagspris)",60
+53,"Stor Lysmixer (Ekstern, Start)",900
+54,"Stor Lysmixer (Ekstern, Dagspris)",450
+55,"Stor Lysmixer (Intern, Start)",600
+56,"Stor Lysmixer (Intern, Dagspris)",300
+57,"Mellem Lysmixer (Ekstern, Start)",600
+58,"Mellem Lysmixer (Ekstern, Dagspris)",300
+59,"Mellem Lysmixer (Intern, Start)",400
+60,"Mellem Lysmixer (Intern, Dagspris)",200
+61,"Lille Lysmixer (Ekstern, Start)",300
+62,"Lille Lysmixer (Ekstern, Dagspris)",150
+63,"Lille Lysmixer (Intern, Start)",200
+64,"Lille Lysmixer (Intern, Dagspris)",100
+65,"DMX Splitter (Ekstern, Start)",300
+66,"DMX Splitter (Ekstern, Dagspris)",150
+67,"DMX Splitter (Intern, Start)",200
+68,"DMX Splitter (Intern, Dagspris)",100
+69,"Røgmaskine (Ekstern, Start)",400
+70,"Røgmaskine (Ekstern, Dagspris)",350
+71,"Røgmaskine (Intern, Start)",350
+72,"Røgmaskine (Intern, Dagspris)",300
+73,"Fazer (Ekstern, Start)",400
+74,"Fazer (Ekstern, Dagspris)",350
+75,"Fazer (Intern, Start)",350
+76,"Fazer (Intern, Dagspris)",300
+77,"Ekstra Røgvæske (Ekstern, Start)",300
+78,"Ekstra Røgvæske (Intern, Start)",300
+79,"Scene (Ekstern, Start)",150
+80,"Scene (Ekstern, Dagspris)",150
+81,"Scene (Intern, Start)",150
+82,"Scene (Intern, Dagspris)",150
+83,"Gorillahegn (Ekstern, Start)",150
+84,"Gorillahegn (Ekstern, Dagspris)",150
+85,"Gorillahegn (Intern, Start)",150
+86,"Gorillahegn (Intern, Dagspris)",150
+87,"DJ Pult (Ekstern, Start)",1000
+88,"DJ Pult (Ekstern, Dagspris)",800
+89,"DJ Pult (Intern, Start)",800
+90,"DJ Pult (Intern, Dagspris)",700
+91,"DJ Bord (Ekstern, Start)",150
+92,"DJ Bord (Ekstern, Dagspris)",150
+93,"DJ Bord (Intern, Start)",150
+94,"DJ Bord (Intern, Dagspris)",150
+95,"Rig (Ekstern, Start)",300
+96,"Rig (Ekstern, Dagspris)",300
+97,"Rig (Intern, Start)",300
+98,"Rig (Intern, Dagspris)",300
+99,"Hus DJ (pr. time)",400

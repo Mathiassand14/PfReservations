@@ -1,0 +1,7 @@
+services:
+  db:
+    ports:
+      - "55432:5432"
+  app:
+    ports:
+      - "${HOST_PORT:-3456}:${PORT:-3456}"

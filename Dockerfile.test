@@ -1,0 +1,14 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install dependencies including dev deps for running tests
+COPY package*.json ./
+RUN npm ci
+
+# Copy application code
+COPY . .
+
+ENV NODE_ENV=test
+
+CMD ["sh", "-lc", "node bin/wait-for-db.js && npm run migrate && npm run test:ci"]

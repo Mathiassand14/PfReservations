@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment Rental Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-tools"></i>
+            <span>Equipment Rental</span>
+        </div>
+        <div class="nav-links">
+            <a href="#" data-section="dashboard" class="nav-link active">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            <a href="#" data-section="items" class="nav-link">
+                <i class="fas fa-boxes"></i> Items
+            </a>
+            <a href="#" data-section="orders" class="nav-link">
+                <i class="fas fa-clipboard-list"></i> Orders
+            </a>
+            <a href="#" data-section="customers" class="nav-link">
+                <i class="fas fa-users"></i> Customers
+            </a>
+            <a href="#" data-section="employees" class="nav-link">
+                <i class="fas fa-user-tie"></i> Employees
+            </a>
+            <a href="#" data-section="stock" class="nav-link">
+                <i class="fas fa-chart-bar"></i> Stock Movements
+            </a>
+            <a href="#" data-section="calendar" class="nav-link">
+                <i class="fas fa-calendar"></i> Calendar
+            </a>
+        </div>
+        <div class="nav-settings">
+            <button id="adminTokenBtn" class="btn btn-outline">
+                <i class="fas fa-key"></i> Admin Token
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" class="content-section active">
+            <div class="section-header">
+                <h1>Dashboard</h1>
+                <p>Overview of equipment rental operations</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="activeOrders">-</h3>
+                        <p>Active Orders</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalItems">-</h3>
+                        <p>Total Items</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="lowStockItems">-</h3>
+                        <p>Low Stock Items</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="overdueOrders">-</h3>
+                        <p>Overdue Orders</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <div class="dashboard-section">
+                    <h2>Recent Orders</h2>
+                    <div id="recentOrdersList" class="data-list">
+                        <div class="loading">Loading recent orders...</div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-section">
+                    <h2>Low Stock Alert</h2>
+                    <div id="lowStockList" class="data-list">
+                        <div class="loading">Loading stock levels...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Items Section -->
+        <section id="items-section" class="content-section">
+            <div class="section-header">
+                <h1>Items Management</h1>
+                <div class="section-actions">
+                    <button id="addItemBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Item
+                    </button>
+                    <select id="itemTypeFilter" class="form-select">
+                        <option value="">All Items</option>
+                        <option value="atomic">Atomic Items</option>
+                        <option value="composite">Composite Items</option>
+                        <option value="service">Service Items</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div id="itemsList" class="data-table">
+                <div class="loading">Loading items...</div>
+            </div>
+        </section>
+
+        <!-- Orders Section -->
+        <section id="orders-section" class="content-section">
+            <div class="section-header">
+                <h1>Orders Management</h1>
+                <div class="section-actions">
+                    <button id="addOrderBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Create Order
+                    </button>
+                    <select id="orderStatusFilter" class="form-select">
+                        <option value="">All Orders</option>
+                        <option value="Draft">Draft</option>
+                        <option value="Reserved">Reserved</option>
+                        <option value="Checked Out">Checked Out</option>
+                        <option value="Returned">Returned</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div id="ordersList" class="data-table">
+                <div class="loading">Loading orders...</div>
+            </div>
+        </section>
+
+        <!-- Customers Section -->
+        <section id="customers-section" class="content-section">
+            <div class="section-header">
+                <h1>Customers Management</h1>
+                <div class="section-actions">
+                    <button id="addCustomerBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Customer
+                    </button>
+                    <input type="search" id="customerSearch" placeholder="Search customers..." class="form-input">
+                </div>
+            </div>
+            
+            <div id="customersList" class="data-table">
+                <div class="loading">Loading customers...</div>
+            </div>
+        </section>
+
+        <!-- Employees Section -->
+        <section id="employees-section" class="content-section">
+            <div class="section-header">
+                <h1>Employees Management</h1>
+                <div class="section-actions">
+                    <button id="addEmployeeBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Employee
+                    </button>
+                    <select id="employeeRoleFilter" class="form-select">
+                        <option value="">All Roles</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Staff">Staff</option>
+                        <option value="ReadOnly">Read Only</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div id="employeesList" class="data-table">
+                <div class="loading">Loading employees...</div>
+            </div>
+        </section>
+
+        <!-- Stock Movements Section -->
+        <section id="stock-section" class="content-section">
+            <div class="section-header">
+                <h1>Stock Movements</h1>
+                <div class="section-actions">
+                    <select id="movementReasonFilter" class="form-select">
+                        <option value="">All Reasons</option>
+                        <option value="checkout">Checkout</option>
+                        <option value="return">Return</option>
+                        <option value="reserve">Reserve</option>
+                        <option value="release">Release</option>
+                        <option value="adjustment">Adjustment</option>
+                        <option value="repair">Repair</option>
+                        <option value="loss">Loss</option>
+                        <option value="found">Found</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div id="stockMovementsList" class="data-table">
+                <div class="loading">Loading stock movements...</div>
+            </div>
+        </section>
+
+        <!-- Calendar Section -->
+        <section id="calendar-section" class="content-section">
+            <div class="section-header">
+                <h1>Calendar & Reports</h1>
+                <div class="section-actions">
+                    <button id="createTokenBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Create Token
+                    </button>
+                    <button id="receiptGeneratorBtn" class="btn btn-outline">
+                        <i class="fas fa-receipt"></i> Generate Receipt
+                    </button>
+                    <select id="calendarViewMode" class="form-select">
+                        <option value="tokens">Token Management</option>
+                        <option value="view">Calendar View</option>
+                        <option value="receipts">Receipt Generator</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="calendar-content">
+                <!-- Token Management View -->
+                <div id="tokenManagementView" class="calendar-view active">
+                    <div class="info-box">
+                        <h3>Calendar Integration</h3>
+                        <p>Create calendar tokens to generate ICS feeds that can be imported into Google Calendar, Outlook, Apple Calendar, and other calendar applications. Each token provides access to view all equipment rental schedules.</p>
+                    </div>
+                    
+                    <div id="calendarTokensList" class="data-table">
+                        <div class="loading">Loading calendar tokens...</div>
+                    </div>
+                </div>
+
+                <!-- Calendar View -->
+                <div id="calendarViewContainer" class="calendar-view">
+                    <div class="calendar-controls">
+                        <button id="prevMonth" class="btn btn-outline">
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </button>
+                        <h3 id="calendarMonth"></h3>
+                        <button id="nextMonth" class="btn btn-outline">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="calendar-legend">
+                            <div class="legend-item">
+                                <span class="legend-color status-draft"></span> Draft
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color status-reserved"></span> Reserved
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color status-checked-out"></span> Checked Out
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color status-returned"></span> Returned
+                            </div>
+                        </div>
+                    </div>
+                    <div id="calendarGrid" class="calendar-grid">
+                        <div class="loading">Loading calendar...</div>
+                    </div>
+                </div>
+
+                <!-- Receipt Generator View -->
+                <div id="receiptGeneratorView" class="calendar-view">
+                    <div class="receipt-controls">
+                        <div class="form-group">
+                            <label class="form-label">Select Order for Receipt</label>
+                            <select id="receiptOrderSelect" class="form-select">
+                                <option value="">Loading orders...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button id="generateReceiptBtn" class="btn btn-primary" disabled>
+                                <i class="fas fa-download"></i> Generate & Download Receipt
+                            </button>
+                        </div>
+                    </div>
+                    <div id="receiptPreview" class="receipt-preview">
+                        <p class="text-muted">Select an order to preview receipt details</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modals and overlays will be dynamically created -->
+    <div id="modalOverlay" class="modal-overlay"></div>
+    
+    <!-- Scripts -->
+    <script src="api.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+services:
+  app:
+    build: .
+    environment:
+      - DATABASE_URL=postgresql://equipment_user:equipment_pass@db:5432/equipment_rental
+      - X_ADMIN_TOKEN=secure-admin-token-change-in-production
+      - NODE_ENV=production
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=equipment_rental
+      - POSTGRES_USER=equipment_user
+      - POSTGRES_PASSWORD=equipment_pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

@@ -1,0 +1,30 @@
+
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=equipment_rental
+      - POSTGRES_USER=equipment_user
+      - POSTGRES_PASSWORD=equipment_pass
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    # Ephemeral storage for clean DB each test run
+    tmpfs:
+      - /var/lib/postgresql/data
+    restart: unless-stopped
+
+  app-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    environment:
+      - PORT=3500
+      - DATABASE_URL=postgresql://equipment_user:equipment_pass@db:5432/equipment_rental
+      - X_ADMIN_TOKEN=test-token
+      - DB_WAIT_ATTEMPTS=60
+      - DB_WAIT_DELAY_MS=1000
+      - NODE_ENV=test
+    depends_on:
+      - db
+    restart: "no"
+    volumes:
+      - ./.data/test-logs:/app/.data/test-logs
